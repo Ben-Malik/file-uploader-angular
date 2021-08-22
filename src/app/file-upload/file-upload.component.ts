@@ -37,7 +37,7 @@ export class FileUploadComponent implements OnInit {
       const uploadedFile = new UploadedFile();
       uploadedFile.fileName = file.name;
       this.uploadedFiles.push(uploadedFile);
-      this.fileService.uploadSingleFile(file)
+      this.fileService.uploadFileToDB(file)
         .pipe(tap(event => {
           if (event.type === HttpEventType.UploadProgress) {
             const totalNum = event!.total;
