@@ -1,0 +1,41 @@
+.active {
+    background-color: #6071cf;
+    color: white;
+  }
+  
+  a:hover {
+    background-color: #263796;
+    color: white;
+  }
+  
+  a {
+    color: white;
+    text-decoration: none;
+  }
+
+
+  mat-toolbar {
+    background-color: darkslategray;
+  }
+  .github {
+   align-items: right;
+   margin-left: 10px;
+  }
+  .github a:hover, title a:hover {
+    background-color: darkslategray;
+  }
+  mat-toolbar-row {
+    justify-content: space-between;
+  }
+  .trigger a {
+    margin-left: 15px;
+  }
+
+  .title {
+    padding: 5px;
+    display: inline-table;
+  }
+
+  .title a, title h1 {
+    float: left;
+  }

@@ -1,0 +1,18 @@
+<div class="view-component">
+    <table *ngFor="let type of keys" id="files">
+        <h1>Files with Type: {{type}}</h1>
+        <tr>
+            <th *ngFor="let column of headers">
+                {{column}}
+            </th>
+        </tr>
+
+        <tr *ngFor="let row of groupedFiles[type]">
+            <td>{{row.fileName}}</td>
+            <td>{{row.fileSize}} KB</td>
+            <td>{{row.fileType}}</td>
+            <td>{{row.uploadedAt}}</td>
+        </tr>
+    </table>
+    <div class="footer"></div>
+</div>
