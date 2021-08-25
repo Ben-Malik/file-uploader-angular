@@ -20,7 +20,7 @@ export class FileService {
     formData.append('file', file);
     console.log(formData);
     return this.http.post<any>(
-      'http://localhost:8080/uploadFile',
+      'https://localhost:8002/upload',
       formData,
       {
         reportProgress: true,
@@ -34,6 +34,6 @@ export class FileService {
    */
   fetchFiles() {
     return this.http
-      .get<any[]>('http://localhost:8080/getFiles');
+      .get<any[]>('https://localhost:8002/view-files');
   }
 }

@@ -11,7 +11,12 @@
             <td>{{row.fileName}}</td>
             <td>{{row.fileSize}} KB</td>
             <td>{{row.fileType}}</td>
-            <td>{{row.uploadedAt}}</td>
+            <td>{{row.createdAt}}</td>
+            <td>
+                <button class="btn" (click)="onClickDownloadPdf(row.fileContent,row.fileName, row.fileType)">
+                    Download Me
+              </button>
+            </td>
         </tr>
     </table>
     <div class="footer"></div>
