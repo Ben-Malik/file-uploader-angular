@@ -29,6 +29,7 @@
       <mat-card-header>
         <mat-card-title *ngIf="!showProgress"><strong>No Upload in Progress!</strong></mat-card-title>
         <mat-card-title *ngIf="showProgress"><strong>Files</strong></mat-card-title>
+        <mat-card-title *ngIf="!isFileValid"><strong class="file-oversize">File size larger than allowed capacity!</strong></mat-card-title>
         <mat-card-subtitle *ngFor="let uploadedFile of uploadedFiles">
           {{uploadedFile.fileName}} - {{uploadedFile.progress}}%
           <mat-progress-bar mode="determinate" value="{{uploadedFile.progress}}"></mat-progress-bar>
@@ -36,7 +37,6 @@
       </mat-card-header>
     </mat-card>
   </div>
-
   <div class="go-to-dashboard">    
     <a href="/view-files">Go to Dashboard ></a>
   </div>
