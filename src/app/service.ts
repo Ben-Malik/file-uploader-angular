@@ -15,10 +15,9 @@ export class FileService {
    * @param file The file to be saved.
    * @returns  an object of the filename and progress of the upload.
    */
-  uploadFileToDB(file: File): Observable<HttpEvent<{}>> {
+  uploadFileToDB(file: any): Observable<HttpEvent<{}>> {
     const formData: FormData = new FormData();
     formData.append('file', file);
-    console.log(formData);
     return this.http.post<any>(
       'https://localhost:8002/upload',
       formData,

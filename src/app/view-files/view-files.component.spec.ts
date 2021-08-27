@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ViewFilesComponent } from './view-files.component';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import {HttpClientModule} from '@angular/common/http';
 
 describe('ViewFilesComponent', () => {
   let component: ViewFilesComponent;
@@ -17,9 +19,5 @@ describe('ViewFilesComponent', () => {
     fixture = TestBed.createComponent(ViewFilesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
   });
 });

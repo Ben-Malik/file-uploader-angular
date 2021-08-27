@@ -4,12 +4,12 @@
     <mat-card>
       <mat-card-header>
         <mat-card-title>Click the box below to choose new files</mat-card-title>
-        <i>(Multiple Available)</i>
+        <i class="max-size-message">(Max Size: {{MAX_FILE_SIZE}} KB)</i>
         <mat-card-subtitle>
           <span *ngIf="selectedFiles !== undefined">{{selectedFiles.length}} file(s) selected</span>
         </mat-card-subtitle>
         <mat-card-subtitle>
-          <input style="color: white" placeholder="Choose a file" #fileInput type="file" (change)="selectFile($event)" style="display:none;" ngModel multiple/>
+          <input style="color: white" placeholder="Choose a file" #fileInput name="fileInput" type="file" (change)="selectFile($event)" style="display:none;" ngModel multiple/>
           <mat-form-field class="example-full-width" (click)="fileInput.click()">
             <div>
               <input matInput
@@ -18,7 +18,7 @@
           </mat-form-field>
           &nbsp;
           <div>         
-            <button mat-raised-button color="primary" (click)="upload()">Upload</button>
+            <button [disabled]="!isFileValid" mat-raised-button color="primary" (click)="upload()">Upload</button>
           </div>
         </mat-card-subtitle>
       </mat-card-header>

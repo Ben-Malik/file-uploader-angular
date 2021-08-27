@@ -36,3 +36,7 @@ mat-card {
 .file-oversize {
     color: red;
 }
+
+.max-size-message {
+    color: rgb(160, 124, 58);
+}

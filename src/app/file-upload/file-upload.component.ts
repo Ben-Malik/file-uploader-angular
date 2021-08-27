@@ -5,11 +5,9 @@ import { FileService } from '../service';
 import { UploadedFile } from '../file.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-const MAX_FILE_SIZE = 20000000; //20M
-const FORBIDDEN_FILES = ["js", "html", "php", "java"];
 
 @Component({
-  selector: 'app-multi-file-upload',
+  selector: 'app-upload-file',
   templateUrl: './file-upload.component.html',
   styleUrls: ['./file-upload.component.css']
 })
@@ -20,26 +18,42 @@ export class FileUploadComponent implements OnInit {
   uploadedFiles: UploadedFile[] = [];
   showProgress = false;
   isFileValid = true;
+  fileUploadFailed = false;
+  MAX_FILE_SIZE = 20000000; //20M
+  fileInput:string = "";
+
 
   constructor(private http: HttpClient, private fileService: FileService, private snackBar: MatSnackBar) {
   }
 
-  ngOnInit(): void {  }
+  ngOnInit(): void { 
+  
+   }
 
   // Selected file is stored into selectedFiles.
   selectFile(event: any) {
+    this.isFileValid = true;
     this.selectedFiles = event.target.files;
+    Array.from(this.selectedFiles).forEach(file => {
+      if (file.size > this.MAX_FILE_SIZE) {
+        this.isFileValid = false;
+        return;
+      }
+    })
   }
 
   // Uploads the file to backend server.
   upload() {
     this.showProgress = true;
     this.uploadedFiles = [];
+    if (!this.isFileValid) {
+      return;
+    }
     Array.from(this.selectedFiles).forEach(file => {
       const uploadedFile = new UploadedFile();
       uploadedFile.fileName = file.name;
       uploadedFile.fileSize = file.size;
-      if (uploadedFile.fileSize <= MAX_FILE_SIZE) {
+      if (uploadedFile.fileSize <= this.MAX_FILE_SIZE) {
         uploadedFile.isFileValid = true;
         this.uploadedFiles.push(uploadedFile);
         this.fileService.uploadFileToDB(file)
@@ -49,7 +63,7 @@ export class FileUploadComponent implements OnInit {
               if (totalNum != null) {
                 this.loaded = Math.round(100 * event.loaded / totalNum);
                 uploadedFile.progress = this.loaded;
-
+                this.fileInput = '';  
               } else {
                 return;
               }
@@ -57,7 +71,6 @@ export class FileUploadComponent implements OnInit {
           })).subscribe((event: any) => {
             if (event instanceof HttpResponse) {
               if (this.selectedFiles.item(this.selectedFiles.length - 1) === file) {
-                // Invokes fetchFileNames() when last file in the list is uploaded.
                 this.fileService.fetchFiles();
               }
             }
@@ -65,6 +78,7 @@ export class FileUploadComponent implements OnInit {
       } else {
         uploadedFile.isFileValid = false;
         this.isFileValid = false;
+        this.fileUploadFailed = true;
       }
     });
   }
