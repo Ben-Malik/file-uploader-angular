@@ -1,7 +1,7 @@
 # FileUploaderFrontend
+# Backend: [Upload File .Net Core MVC](https://github.com/Ben-Malik/upload-files-dot-net-core)
 
-
-# Backend Available here: [Upload File Spring Boot](https://github.com/Ben-Malik/file-uploader-spring-boot)
+# Backend: [Upload File Spring Boot](https://github.com/Ben-Malik/file-uploader-spring-boot)
 
 ![Screenshot](https://github.com/Ben-Malik/file-uploader-angular/blob/master/2.png)
 ![Screenshot](https://github.com/Ben-Malik/file-uploader-angular/blob/master/3.png)
@@ -11,7 +11,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/upload-file`. The app will automatically reload if you change any of the source files.
 
 ## Code scaffolding
 
