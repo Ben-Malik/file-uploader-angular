@@ -1,3 +1,7 @@
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, 1)"
+  template="<img src='https://media.giphy.com/media/o8igknyuKs6aY/giphy.gif' />">    
+</ngx-spinner>
 <div class="view-component">
     <table *ngFor="let type of keys" id="files">
         <h1>Files with Type: {{type}}</h1>
@@ -13,7 +17,7 @@
             <td>{{row.fileType}}</td>
             <td>{{row.createdAt}}</td>
             <td>
-                <button class="btn" (click)="onClickDownloadPdf(row.fileContent,row.fileName, row.fileType)">
+                <button class="btn" (click)="onClickDownloadFile(row.fileContent,row.fileName, row.fileType)">
                     Download Me
               </button>
             </td>

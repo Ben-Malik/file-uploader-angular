@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {FileService} from '../service';
 import {DomSanitizer} from '@angular/platform-browser';
+import { NgxSpinnerService } from "ngx-spinner";
+
 @Component({
   selector: 'app-view-files',
   templateUrl: './view-files.component.html',
@@ -15,16 +17,19 @@ export class ViewFilesComponent implements OnInit {
   keys: any[] = [];
   group: string = "fileType";
   headers = ["File Name", "File Size", "File Type", "Upload Date", ""];
-  constructor(private http: HttpClient, private fileService: FileService, private sanitizer: DomSanitizer) {
+
+  constructor(private http: HttpClient, private fileService: FileService, private sanitizer: DomSanitizer, private spinner: NgxSpinnerService) {
   }
 
   ngOnInit(): void {
+    this.spinner.show();
+
     this.fetchFiles();
   }
 
-  downloadPdf(base64String:string, fileName:string, fileType:string){
+  downloadFile(base64String:string, fileName:string, fileType:string){
     if(window.navigator && window.navigator.msSaveOrOpenBlob){ 
-      // download PDF in IE
+      // download file in IE
       let byteChar = atob(base64String);
       let byteArray = new Array(byteChar.length);
       for(let i = 0; i < byteChar.length; i++){
@@ -34,7 +39,7 @@ export class ViewFilesComponent implements OnInit {
       let blob = new Blob([uIntArray], {type : fileType});
       window.navigator.msSaveOrOpenBlob(blob, `${fileName}`);
     } else {
-      // Download PDF in Chrome etc.
+      // Download file in Chrome etc.
       const source = `data:${fileType};base64,${base64String}`;
       const link = document.createElement("a");
       link.href = source;
@@ -42,13 +47,17 @@ export class ViewFilesComponent implements OnInit {
       link.click();
     }
   }
-  onClickDownloadPdf(base64String:string, fileName:string, fileType:string){
-    this.downloadPdf(base64String, fileName, fileType);
+
+  onClickDownloadFile(base64String:string, fileName:string, fileType:string){
+    this.downloadFile(base64String, fileName, fileType);
   }
 
   // Fetches the file names to display in list.
   fetchFiles() {
     this.fileService.fetchFiles().subscribe(files => {
+      if (files) {
+        this.spinner.hide();
+      }
       this.files = files;
       const groupByFileType = this.groupBy('fileType');
 
@@ -57,6 +66,15 @@ export class ViewFilesComponent implements OnInit {
     });
 
   }
+   hideloader() {
+  
+    // Setting display of spinner
+    // element to none
+    const element = window.document.getElementById('loading');
+    if ( element) {
+      element.style.display = 'none'
+    }
+  } 
 
   groupBy = (key: string ) => (array: any[]) =>
   array.reduce(

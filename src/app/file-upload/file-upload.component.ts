@@ -21,12 +21,14 @@ export class FileUploadComponent implements OnInit {
   fileUploadFailed = false;
   MAX_FILE_SIZE = 20000000; //20M
   fileInput:string = "";
+  isAnyFileSelected = false;
 
 
   constructor(private http: HttpClient, private fileService: FileService, private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void { 
+    this.isAnyFileSelected = false;
   
    }
 
@@ -39,7 +41,8 @@ export class FileUploadComponent implements OnInit {
         this.isFileValid = false;
         return;
       }
-    })
+    });
+    this.isAnyFileSelected = true;
   }
 
   // Uploads the file to backend server.
@@ -72,6 +75,9 @@ export class FileUploadComponent implements OnInit {
             if (event instanceof HttpResponse) {
               if (this.selectedFiles.item(this.selectedFiles.length - 1) === file) {
                 this.fileService.fetchFiles();
+                this.selectedFiles = new FileList;
+                console.log(this.selectedFiles)
+                this.isAnyFileSelected = false;
               }
             }
           });

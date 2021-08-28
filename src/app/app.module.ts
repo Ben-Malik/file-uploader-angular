@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -18,8 +18,11 @@ import {MatInputModule} from '@angular/material/input';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatListModule} from '@angular/material/list';
 import { ViewFilesComponent } from './view-files/view-files.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
+import { NgxSpinnerModule } from "ngx-spinner";
 
 const appRoutes: Routes = [
+  {path: '', component: ViewFilesComponent },
   {path: 'view-files', component: ViewFilesComponent },
   {path: 'upload-file', component: FileUploadComponent}
 ];
@@ -46,7 +49,11 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     MatListModule,  
     HttpClientModule,
+    BrowserAnimationsModule,
+    NgxSpinnerModule,
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+
   providers: [],
   bootstrap: [AppComponent]
 })
