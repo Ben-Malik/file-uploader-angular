@@ -1,4 +1,4 @@
-# FileUploaderFrontend
+# FileUploaderFrontend - Angular
 # Backend: [Upload File .Net Core MVC](https://github.com/Ben-Malik/upload-files-dot-net-core)
 
 # Backend: [Upload File Spring Boot](https://github.com/Ben-Malik/file-uploader-spring-boot)
