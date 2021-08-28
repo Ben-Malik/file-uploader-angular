@@ -3,10 +3,6 @@
 
 # Backend: [Upload File Spring Boot](https://github.com/Ben-Malik/file-uploader-spring-boot)
 
-![Screenshot](https://github.com/Ben-Malik/file-uploader-angular/blob/master/2.png)
-![Screenshot](https://github.com/Ben-Malik/file-uploader-angular/blob/master/3.png)
-![Screenshot](https://github.com/Ben-Malik/file-uploader-angular/blob/master/1.png)
-
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.1.
 
 ## Development server
