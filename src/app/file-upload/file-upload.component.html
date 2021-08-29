@@ -4,7 +4,7 @@
     <mat-card>
       <mat-card-header>
         <mat-card-title>Click the box below to choose new files</mat-card-title>
-        <i class="max-size-message">(Max Size: {{MAX_FILE_SIZE}} KB)</i>
+        <i class="max-size-message">(Max Size: {{fileService.formatBytes(MAX_FILE_SIZE)}})</i>
         <mat-card-subtitle>
           <span *ngIf="selectedFiles !== undefined">{{selectedFiles.length}} file(s) selected</span>
         </mat-card-subtitle>

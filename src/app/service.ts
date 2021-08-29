@@ -35,4 +35,23 @@ export class FileService {
     return this.http
       .get<any[]>('https://localhost:8002/view-files');
   }
+
+  /**
+   * Converts a given value of bytes into it's corresponding exact unit.
+   * @param bytes the bytes to be formated.
+   * @param decimals  the precision after the dot: 2 if not given.
+   * @returns string for the size + size unit. Eg: 12.50 MB
+   */
+  formatBytes(bytes:any, decimals = 2) {
+    if (bytes === 0) return '0 Bytes';
+  
+    const k = 1024;
+    const dm = decimals < 0 ? 0 : decimals;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+  
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+  
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+  }
 }
+

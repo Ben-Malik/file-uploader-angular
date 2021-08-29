@@ -19,12 +19,12 @@ export class FileUploadComponent implements OnInit {
   showProgress = false;
   isFileValid = true;
   fileUploadFailed = false;
-  MAX_FILE_SIZE = 20000000; //20M
+  MAX_FILE_SIZE = 20971520; //20M
   fileInput:string = "";
   isAnyFileSelected = false;
 
 
-  constructor(private http: HttpClient, private fileService: FileService, private snackBar: MatSnackBar) {
+  constructor(private http: HttpClient, public fileService: FileService, private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void { 

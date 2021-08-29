@@ -1,8 +1,11 @@
-<ngx-spinner
-  bdColor="rgba(0, 0, 0, 1)"
-  template="<img src='https://media.giphy.com/media/o8igknyuKs6aY/giphy.gif' />">    
+<ngx-spinner>    
+    <span style="color: white">loading files...</span>
 </ngx-spinner>
 <div class="view-component">
+    <div class="no-data-available" *ngIf="filesLoaded && files.length == 0">
+        <h1>No data available</h1>
+    </div>
+
     <table *ngFor="let type of keys" id="files">
         <h1>Files with Type: {{type}}</h1>
         <tr>
@@ -13,7 +16,7 @@
 
         <tr *ngFor="let row of groupedFiles[type]">
             <td>{{row.fileName}}</td>
-            <td>{{row.fileSize}} KB</td>
+            <td>{{fileService.formatBytes(row.fileSize)}}</td>
             <td>{{row.fileType}}</td>
             <td>{{row.createdAt}}</td>
             <td>

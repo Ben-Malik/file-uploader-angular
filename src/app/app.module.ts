@@ -22,7 +22,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxSpinnerModule } from "ngx-spinner";
 
 const appRoutes: Routes = [
-  {path: '', component: ViewFilesComponent },
+  {path: '', component: FileUploadComponent },
   {path: 'view-files', component: ViewFilesComponent },
   {path: 'upload-file', component: FileUploadComponent}
 ];

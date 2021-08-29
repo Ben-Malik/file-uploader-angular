@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {FileService} from '../service';
 import {DomSanitizer} from '@angular/platform-browser';
 import { NgxSpinnerService } from "ngx-spinner";
+import { Byte } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-view-files',
@@ -17,16 +18,18 @@ export class ViewFilesComponent implements OnInit {
   keys: any[] = [];
   group: string = "fileType";
   headers = ["File Name", "File Size", "File Type", "Upload Date", ""];
+  filesLoaded = false;
 
-  constructor(private http: HttpClient, private fileService: FileService, private sanitizer: DomSanitizer, private spinner: NgxSpinnerService) {
+  constructor(private http: HttpClient, public fileService: FileService, private sanitizer: DomSanitizer, 
+    private spinner: NgxSpinnerService) {
   }
 
   ngOnInit(): void {
     this.spinner.show();
-
-    this.fetchFiles();
+    this.fetchAndGroupifyFiles();
   }
 
+  // Doanloads a file with given file content, name and type.
   downloadFile(base64String:string, fileName:string, fileType:string){
     if(window.navigator && window.navigator.msSaveOrOpenBlob){ 
       // download file in IE
@@ -48,34 +51,27 @@ export class ViewFilesComponent implements OnInit {
     }
   }
 
+  // Called to download a given file matching given parameters.
   onClickDownloadFile(base64String:string, fileName:string, fileType:string){
     this.downloadFile(base64String, fileName, fileType);
   }
 
   // Fetches the file names to display in list.
-  fetchFiles() {
+  fetchAndGroupifyFiles() {
     this.fileService.fetchFiles().subscribe(files => {
       if (files) {
         this.spinner.hide();
+        this.filesLoaded = true;
       }
       this.files = files;
-      const groupByFileType = this.groupBy('fileType');
+      const groupByFileType = this.groupBy(this.group);
 
       this.keys = Object.keys(groupByFileType(this.files));
       this.groupedFiles = groupByFileType(this.files);
     });
-
   }
-   hideloader() {
-  
-    // Setting display of spinner
-    // element to none
-    const element = window.document.getElementById('loading');
-    if ( element) {
-      element.style.display = 'none'
-    }
-  } 
 
+  // Groups a given array of object by the given key.
   groupBy = (key: string ) => (array: any[]) =>
   array.reduce(
     (objectsByKeyValue, obj) => ({
@@ -84,6 +80,5 @@ export class ViewFilesComponent implements OnInit {
     }),
     {}
   );
-	
 
 }
